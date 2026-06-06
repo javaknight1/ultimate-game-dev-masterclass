@@ -7,7 +7,8 @@
 const fs = require('fs');
 const path = require('path');
 const ROOT = __dirname;
-const HTML = path.join(ROOT, 'index.html');
+const TPL = path.join(ROOT, 'index.template.html'); // shell with the /*__LESSONS__*/[] marker
+const HTML = path.join(ROOT, 'index.html');          // built output (assembled)
 const DATA = path.join(ROOT, 'data');
 
 // [data-file id, sidebar part label, part number]  — order = display order
@@ -29,15 +30,15 @@ const cover = {
 <div class="cover">
 <span class="lesson-kicker">press start · zero → shipped game</span>
 <h2 class="lesson-title">make<br>games.</h2>
-<p class="lede">The complete path from "I've never made a game" to shipping one. Foundations that work in any engine, full courses in three engines (Godot, Unity, Unreal) and three from-scratch languages (C++, Python, JavaScript), 3D art in Blender, game audio, and how to publish &amp; monetize. Every lesson ends with a small game you actually build.</p>
+<p class="lede">The complete path from "I've never made a game" to a portfolio of shipped ones. Learn the engine-agnostic Foundations, then <strong>pick ONE path</strong> — a game engine (Godot, Unity, Unreal) or a from-scratch language (C++, Python, JavaScript) — and go all the way through it, building a new game across a new genre as your skills grow. Then round it out with 3D art in Blender, game audio, and how to publish &amp; monetize.</p>
 <div class="grid2">
   <div class="card"><div class="ct">🎮 Build every step</div><p>Each lesson ends with a "Build This" — a small playable game using the skill you just learned. You learn game dev by making games, not by reading about them.</p></div>
   <div class="card"><div class="ct">🧠 Engine-agnostic first</div><p>Part 00 teaches the universal ideas — the game loop, sprites, collision, vectors, state machines — so every engine afterward just clicks.</p></div>
-  <div class="card"><div class="ct">🛠 Three engines, three languages</div><p>Full courses in Godot, Unity, and Unreal — plus making games from scratch in C++, Python, and JavaScript. Pick your path or learn them all.</p></div>
+  <div class="card"><div class="ct">🛠 Pick one path, go deep</div><p>Six tracks, one choice: an engine (Godot/Unity/Unreal) or a from-scratch language (C++/Python/JavaScript). Stay with it — each lesson's game builds on the last or starts a new genre, so you finish with a portfolio of different-genre games in your one path.</p></div>
   <div class="card"><div class="ct">🚀 Art, audio &amp; shipping</div><p>3D modeling in Blender, sound design &amp; music, then deploying, marketing, and monetizing your finished game.</p></div>
 </div>
 <h3>How this course is structured</h3>
-<p>Ten parts that build on each other. Start with Foundations, then dive into whichever engine or language calls to you — each is self-contained. Mark lessons complete as you go; your progress bar lives in the sidebar.</p>
+<p>Start with Foundations, then <strong>choose your path</strong> — one engine or one from-scratch language — and follow it the whole way; each is self-contained. Blender, Game Audio, and Ship It apply whatever you chose. Mark lessons complete as you go; your progress bar lives in the sidebar.</p>
 <div class="box tip"><div class="bt">The one rule.</div> Finish each "Build This." A game you can actually play, however tiny, teaches more than a chapter you only read.</div>
 </div>
 ` };
@@ -60,9 +61,9 @@ function main() {
     total += arr.length;
     console.log('  ' + label.padEnd(28) + arr.length + ' lessons');
   }
-  let html = fs.readFileSync(HTML, 'utf8');
+  let html = fs.readFileSync(TPL, 'utf8');
   const MARK = '/*__LESSONS__*/[]';
-  if (!html.includes(MARK)) { console.error('marker not found in index.html'); process.exit(1); }
+  if (!html.includes(MARK)) { console.error('marker not found in index.template.html'); process.exit(1); }
   let json = JSON.stringify(all);
   json = json.replace(/<\/script/gi, '<\\/script'); // never break the inline <script>
   html = html.replace(MARK, () => json);
