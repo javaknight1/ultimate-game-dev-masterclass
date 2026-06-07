@@ -43,15 +43,22 @@ const cover = {
 </div>
 ` };
 
+// A part's lessons come from either chunk files (<id>.c1.json, <id>.c2.json …) or a single <id>.json.
+function loadPart(id) {
+  const chunks = fs.readdirSync(DATA)
+    .filter(f => new RegExp('^' + id + '\\.c(\\d+)\\.json$').test(f))
+    .sort((a, b) => +a.match(/\.c(\d+)\./)[1] - +b.match(/\.c(\d+)\./)[1]);
+  const files = chunks.length ? chunks : [id + '.json'];
+  return files.flatMap(f => JSON.parse(fs.readFileSync(path.join(DATA, f), 'utf8')));
+}
+
 function main() {
   const all = [cover];
   let total = 0;
   for (const [id, label, n] of ORDER) {
-    const file = path.join(DATA, id + '.json');
-    if (!fs.existsSync(file)) { console.error('MISSING data/' + id + '.json'); process.exit(1); }
     let arr;
-    try { arr = JSON.parse(fs.readFileSync(file, 'utf8')); }
-    catch (e) { console.error('BAD JSON in data/' + id + '.json: ' + e.message); process.exit(1); }
+    try { arr = loadPart(id); }
+    catch (e) { console.error('LOAD ERROR for ' + id + ': ' + e.message); process.exit(1); }
     arr.forEach((les, i) => {
       les.part = label;
       les.num = n + '.' + (i + 1);
