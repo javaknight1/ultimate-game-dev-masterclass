@@ -20,9 +20,10 @@ const ORDER = [
   ['p4', '04 · C++ (from scratch)', 4],
   ['p5', '05 · Python (from scratch)', 5],
   ['p6', '06 · JavaScript (from scratch)', 6],
-  ['p8', '07 · 3D Art (Blender)', 7],
-  ['p9', '08 · Game Audio', 8],
-  ['p7', '09 · Ship It', 9],
+  ['p12', '07 · Game Design', 7],
+  ['p8', '08 · 3D Art (Blender)', 8],
+  ['p9', '09 · Game Audio', 9],
+  ['p7', '10 · Ship It', 10],
 ];
 
 const cover = {

@@ -2,7 +2,7 @@
 
 A self-contained game-dev course — single HTML file, no server required. Retro-arcade/CRT theme, sidebar navigation, progress tracking, and a hands-on **🎮 Build This** game (or exercise) at the end of every lesson.
 
-**~193 lessons. Learn the fundamentals, pick ONE path, master it, and build a portfolio across every genre.**
+**~203 lessons. Learn the fundamentals, pick ONE path, master it, and build a portfolio across every genre.**
 
 - **00 · Foundations** — engine-agnostic concepts (game loop, vectors, sprites, collision & physics, animation, ECS, state machines, tilemaps, audio, AI, shaders, production) — ending with **Choose Your Path**.
 
@@ -15,7 +15,7 @@ Each path tours: classic arcade, side-scroller, metroidvania, top-down adventure
 
 Then, whatever path you chose:
 
-- **07 · 3D Art** with Blender · **08 · Game Audio** · **09 · Ship It** (deploy, publish, market, monetize)
+- **07 · Game Design** (engine-agnostic) · **08 · 3D Art** with Blender · **09 · Game Audio** · **10 · Ship It** (deploy, publish, market, monetize)
 
 Every Build-This is **progressive** — it extends a game from a previous lesson or starts a new genre — so you finish with a broad, multi-genre portfolio built in one tool.
 
